@@ -86,7 +86,7 @@ jobs:
         id: cache
 
       - name: Update environment
-        run: mamba env update -n test-environment -f conda/environment.yaml
+        run: mamba env update -f conda/environment.yaml -n test-environment
         if: steps.cache.outputs.cache-hit != 'true'
 
       - name: Install unstable dependencies
