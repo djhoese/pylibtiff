@@ -30,7 +30,7 @@ jobs:
           pip install -e .
       - name: Run linting
         run: |
-          flake8 -vv --config setup.cfg libtiff/
+          flake8 -vv --ignore=D101,D102,D103,D105,D106,D107 libtiff/
 
   test:
     runs-on: ${{ matrix.os }}
