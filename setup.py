@@ -209,6 +209,8 @@ def parse_setuppy_commands():
 
 
 def configuration(parent_package='', top_path=None):
+    print("###################: ", parent_package, file=open("/tmp/mylog.log", "a"))
+    raise ValueError("WHAT")
     from numpy.distutils.misc_util import Configuration
     config = Configuration(None, parent_package, top_path)
     config.add_subpackage('libtiff')
@@ -228,6 +230,8 @@ def setup_package():
     else:
         build_requires = (['numpy>=1.13.3'] if 'bdist_wheel' in sys.argv[1:]
                           else [])
+
+    from setuptools import setup, find_packages
 
     metadata = dict(
         name='pylibtiff',
@@ -252,14 +256,13 @@ PyLibTiff? is a Python package that provides the following modules:
         extras_require={
             'bitarray': ['bitarray'],
         },
+        packages=find_packages(),
     )
     if "--force" in sys.argv:
         run_build = True
         sys.argv.remove('--force')
     else:
         run_build = parse_setuppy_commands()
-
-    from setuptools import setup
 
     if run_build:
         from numpy.distutils.core import setup  # noqa: F811
